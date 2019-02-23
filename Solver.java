@@ -10,10 +10,42 @@ public class Solver{
     }
 
     public String[] solve(Maze maze){
-        //Implemente su metodo aqui. Sientase libre de implementar métodos adicionales
-        String[] str = new String[1];
-        str[0] = "[-1]";
-        return str;
+        int size = maze.getMaxMoves();
+        int start = maze.getStartSpace();
+        int exit = maze.getExitSpace();
+        int movin = 0;
+        int mv = start;
+
+        while (mv!=exit){
+            if (movin == size){
+                break;
+            }
+            else {
+                /* aqui vamos a ir recorriendo el laberinto, tenemos que estar concientes de la cantidada de movimientos 
+                que nos quedan y así ver hacia donde podemos movernos.
+                estaba pensando comparar con el valor del estado anterior para ver si se puede regresar o no
+                esta bien hacer esto: 
+                int mvn = maze.moveNorth(start) == start ? -1 : maze.moveNorth(start);
+                int mvs = maze.moveSouth(start) == start ? -1 : maze.moveSouth(start);
+                int mve = maze.moveEast(start) == start ? -1 : maze.moveEast(start);
+                int mvo = maze.moveWest(start) == start ? -1 : maze.moveWest(start);
+                pero tendría que ser mv no start.
+                */
+            }
+        }
+
+        
+
+
+
+
+        String[] solutions = new String[size];
+        int i = 0;
+        while(i<size+1){
+            solutions[i] = "[" + start;
+            i ++;
+        }
+        return solutions;
     }
 
 }
