@@ -4,7 +4,7 @@
     pero es libre de crear otros metodos y clases en este u otro archivo que desee.
 */
 public class Solver{
-
+    String rastro = "[";
     public Solver(){
         
     }
@@ -16,7 +16,7 @@ public class Solver{
         int exit = finalspace.getExitSpace();
         String rastro = "[";
 
-
+        this.move(start, exit, finalspace);
     }
 
     public boolean base(int start, int exit, Maze maze){
@@ -31,20 +31,29 @@ public class Solver{
 
 
     public void move(int start, int exit, Maze maze){
-        if (!base(start, exit, maze)){
-            this.rec();
-        }
-        else return;
-    }
+        if (!(base(start, exit, maze))){
 
-    public String rec(String rastro, int start, int exit, Maze, maze){
-        int n = maze.moveNorth(start);
-        int s = maze.moveSouth(start);
-        int e = maze.moveEast(start);
-        int w = maze.moveWest(start);
-
-        if (n!=-1){
+            if(maze.moveNorth(start) != start){ 
+                start = maze.moveNorth(start);
+                rastro = rastro + start;
+            }
+            else if (maze.moveSouth(start) != start){
+                start = maze.moveNorth(start);
+                rastro = rastro + start;
+            }
+            else if (maze.moveEast(start) != start){
+                start = maze.moveEast(start);
+                rastro = rastro + start;
+            }
+            else if (maze.moveWeast(start) != start){
+                start = maze.moveWest(start);
+                rastro = rastro + start;
+            }
             this.move(start, exit, maze);
+        }
+        else {
+            rastro = rastro + exit;
+            return;
         }
     }
 
