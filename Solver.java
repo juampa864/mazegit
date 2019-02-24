@@ -25,7 +25,7 @@
 
             rastro = "";
             rastro = rastro.concat("[" + start + ", ");
-            solutions.add(this.move(start, exit, finalspace));
+            solutions.add(this.move(start, exit, finalspace, moves));
             i++;
         }
         int size = solutions.size();
@@ -50,16 +50,15 @@
     }
 
 
-    public String move(int start, int exit, Maze maze){
-        if (!(base(start, exit, maze))){
-
+    public String move(int start, int exit, Maze maze, int moves){
+        while(!(base(start, exit, maze))){
             if(maze.moveNorth(start) != start){ 
                 start = maze.moveNorth(start);
                 rastro = rastro.concat(start + ", ");
+            }
             else if (maze.moveSouth(start) != start){
                 start = maze.moveNorth(start);
                 rastro = rastro.concat(start + ", ");
-            }
             }
             else if (maze.moveEast(start) != start){
                 start = maze.moveEast(start);
@@ -67,15 +66,12 @@
             }
             else if (maze.moveWest(start) != start){
                 start = maze.moveWest(start);
-               rastro = rastro.concat(start + ", ");
+                rastro = rastro.concat(start + ", ");
             }
-            this.move(start, exit, maze);
         }
-        else {
-            rastro = rastro.concat(exit+"]");
-            return rastro;
-        }
+        rastro = rastro.concat(exit+"]");
         return rastro;
     }
 
 }//final
+

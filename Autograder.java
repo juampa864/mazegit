@@ -38,8 +38,8 @@ public class Autograder{
 
         double score = 0.0;
         for(int i = 0; i < files.length;i++){
-            String filename = directory+"/"+files[i];
-            String solutionFilename = solutionDirectory+"/solution-"+files[i];
+            String filename = directory+"/"+"test-3.txt";
+            String solutionFilename = solutionDirectory+"/solution-"+"test-3.txt";
             
             System.out.println("-----------------------------------------------------------------");
             System.out.println("Analizando archivo '"+filename+"'");
