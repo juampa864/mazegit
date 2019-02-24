@@ -58,7 +58,9 @@ public class Autograder{
             System.out.println("Soluciones encontradas: "+solutions.length);
             System.out.println("Soluciones esperadas: "+expectedSolutions.length);
             score+=score(solutions,expectedSolutions);
-            Thread.sleep(2000);
+            Thread.sleep(5000);
+            //cambiar a 200 de regreso, solo le aumente tiempo para que me diera tiempo de cerrar esta onda. 
+
             maze.close();
         }
         System.out.println("-----------------------------------------------------------------");
