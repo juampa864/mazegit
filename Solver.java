@@ -6,46 +6,46 @@
 public class Solver{
 
     public Solver(){
-        //Sientase libre de implementar el contructor de la forma que usted lo desee
+        
     }
 
     public String[] solve(Maze maze){
-        int size = maze.getMaxMoves();
-        int start = maze.getStartSpace();
-        int exit = maze.getExitSpace();
-        int movin = 0;
-        int mv = start;
-
-        while (mv!=exit){
-            if (movin == size){
-                break;
-            }
-            else {
-                /* aqui vamos a ir recorriendo el laberinto, tenemos que estar concientes de la cantidada de movimientos 
-                que nos quedan y así ver hacia donde podemos movernos.
-                estaba pensando comparar con el valor del estado anterior para ver si se puede regresar o no
-                esta bien hacer esto: 
-                int mvn = maze.moveNorth(start) == start ? -1 : maze.moveNorth(start);
-                int mvs = maze.moveSouth(start) == start ? -1 : maze.moveSouth(start);
-                int mve = maze.moveEast(start) == start ? -1 : maze.moveEast(start);
-                int mvo = maze.moveWest(start) == start ? -1 : maze.moveWest(start);
-                pero tendría que ser mv no start.
-                */
-            }
-        }
-
-        
+        Maze finalspace = maze;
+        int moves = finalspace.getMaxMoves();
+        int start = finalspace.getStartSpace();
+        int exit = finalspace.getExitSpace();
+        String rastro = "[";
 
 
-
-
-        String[] solutions = new String[size];
-        int i = 0;
-        while(i<size+1){
-            solutions[i] = "[" + start;
-            i ++;
-        }
-        return solutions;
     }
 
-}
+    public boolean base(int start, int exit, Maze maze){
+        int n = maze.moveNorth(start);
+        int s = maze.moveSouth(start);
+        int e = maze.moveEast(start);
+        int w = maze.moveWest(start);
+
+        if ((n == exit) || (s == exit) || (e == exit) || (w == exit)) return true;
+        else return false;
+    }
+
+
+    public void move(int start, int exit, Maze maze){
+        if (!base(start, exit, maze)){
+            this.rec();
+        }
+        else return;
+    }
+
+    public String rec(String rastro, int start, int exit, Maze, maze){
+        int n = maze.moveNorth(start);
+        int s = maze.moveSouth(start);
+        int e = maze.moveEast(start);
+        int w = maze.moveWest(start);
+
+        if (n!=-1){
+            this.move(start, exit, maze);
+        }
+    }
+
+}//final
