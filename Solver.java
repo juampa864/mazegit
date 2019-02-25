@@ -1,36 +1,21 @@
-/*
-    Esta es su clase principal. El unico metodo que debe implementar es
-    public String[] solve(Maze maze)
-    pero es libre de crear otros metodos y clases en este u otro archivo que desee.
-*/
     import java.util.*;
 
 
     public class Solver{
-    String rastro;
-    public Solver(){
-        
-    }
 
-    public String[] solve(Maze maze){
-        Maze finalspace = maze;
+    public Solver(){}
+
+    public String[] solve(Maze finalspace){
         int moves = finalspace.getMaxMoves();
+        int start = finalspace.getStartSpace();
+        int exit = finalspace.getExitSpace();
         ArrayList<String> solutions  = new ArrayList<String>();
-        
 
-        int i = 0;
-        while(i<moves){
-            int start = finalspace.getStartSpace();
-            int exit = finalspace.getExitSpace();
+        this.move(start, exit, 0, finalspace, solutions, "");
 
-            rastro = "";
-            rastro = rastro.concat("[" + start + ", ");
-            solutions.add(this.move(start, exit, finalspace, moves));
-            i++;
-        }
         int size = solutions.size();
         String [] soluciones = new String[size];
-        i=0;
+        int i=0;
         while(i<size){
             soluciones[i] = solutions.get(i);
             i++;
@@ -39,38 +24,49 @@
 
     }
 
-    public boolean base(int start, int exit, Maze maze){
-        int n = maze.moveNorth(start);
-        int s = maze.moveSouth(start);
-        int e = maze.moveEast(start);
-        int w = maze.moveWest(start);
-
-        if ((n == exit) || (s == exit) || (e == exit) || (w == exit)) return true;
+    public boolean base(int start, int exit, ArrayList<String> solutions, String rastro){
+        if (start==exit) {
+            solutions.add("["+rastro+exit+"]");
+            return true;
+        }
         else return false;
     }
 
 
-    public String move(int start, int exit, Maze maze, int moves){
-        while(!(base(start, exit, maze))){
-            if(maze.moveNorth(start) != start){ 
-                start = maze.moveNorth(start);
+    public void move(int start, int exit, int moves, Maze finalspace, ArrayList<String> solutions, String rastro){
+        boolean aux = true;
+        if(!(base(start, exit, solutions, rastro))&&moves<finalspace.getMaxMoves()){
+            if(finalspace.moveNorth(start) != start){ 
                 rastro = rastro.concat(start + ", ");
+                aux = false;
+                moves++;
+                move(finalspace.moveNorth(start), exit, moves, finalspace, solutions, rastro);
             }
-            else if (maze.moveSouth(start) != start){
-                start = maze.moveNorth(start);
-                rastro = rastro.concat(start + ", ");
+            if (finalspace.moveSouth(start) != start){
+                if(aux) {
+                    rastro = rastro.concat(start + ", ");
+                    aux = false;
+                    moves++;
+                }
+                move(finalspace.moveSouth(start), exit, moves, finalspace, solutions, rastro);
             }
-            else if (maze.moveEast(start) != start){
-                start = maze.moveEast(start);
-                rastro = rastro.concat(start + ", ");
+            if (finalspace.moveEast(start) != start){
+                if(aux) {
+                    rastro = rastro.concat(start + ", ");
+                    aux = false;
+                    moves++;
+                }
+                move(finalspace.moveEast(start), exit, moves, finalspace, solutions, rastro);
             }
-            else if (maze.moveWest(start) != start){
-                start = maze.moveWest(start);
-                rastro = rastro.concat(start + ", ");
+            if (finalspace.moveWest(start) != start){
+                if(aux) {
+                    rastro = rastro.concat(start + ", ");
+                    aux = false;
+                    moves++;
+                }
+                move(finalspace.moveWest(start), exit, moves, finalspace, solutions, rastro);
             }
         }
-        rastro = rastro.concat(exit+"]");
-        return rastro;
     }
 
 }//final

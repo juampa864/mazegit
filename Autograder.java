@@ -38,8 +38,8 @@ public class Autograder{
 
         double score = 0.0;
         for(int i = 0; i < files.length;i++){
-            String filename = directory+"/"+"test-3.txt";
-            String solutionFilename = solutionDirectory+"/solution-"+"test-3.txt";
+            String filename = directory+"/"+files[i];
+            String solutionFilename = solutionDirectory+"/solution-"+files[i];
             
             System.out.println("-----------------------------------------------------------------");
             System.out.println("Analizando archivo '"+filename+"'");
@@ -58,7 +58,7 @@ public class Autograder{
             System.out.println("Soluciones encontradas: "+solutions.length);
             System.out.println("Soluciones esperadas: "+expectedSolutions.length);
             score+=score(solutions,expectedSolutions);
-            Thread.sleep(5000);
+            Thread.sleep(2000);
             //cambiar a 200 de regreso, solo le aumente tiempo para que me diera tiempo de cerrar esta onda. 
 
             maze.close();
